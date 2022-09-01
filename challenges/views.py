@@ -3,6 +3,7 @@ from django.http import HttpRequest
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse,HttpResponseBadRequest,HttpResponseNotFound,HttpResponseRedirect
+from django.template.loader import render_to_string
 # Create your views here.
 months = {
     "January" : "DO prepare for gate exams",
@@ -19,6 +20,16 @@ months = {
     "December" : "Get a Job in Amazon",
     
 }
+def index(request):
+    # list_of_months = "";
+    # months_ki_list = list(months.keys())
+    # for month in months_ki_list:
+       
+    #     monthc = month.capitalize()
+    #     path_of_redirection = reverse("monthly-challenge",args=[monthc])
+    #     list_of_months+=f"<a href='{path_of_redirection}'> <h1>{month}</h1></a>"
+    html_string = render_to_string("challenges/challenges.html")
+    return HttpResponse(html_string)
 def challenges_by_number(request,month):
     target_month = list(months.keys())
     if(month>12):
@@ -32,15 +43,7 @@ def monthly_challenge(request,month):
         return HttpResponse(f"<h1>{months[month]}</h1>")
     except :
         return HttpResponseNotFound("Error Page Not Found"+ error)
-def month_list(request):
-    list_of_months = "";
-    months_ki_list = list(months.keys())
-    for month in months_ki_list:
-       
-        monthc = month.capitalize()
-        path_of_redirection = reverse("monthly-challenge",args=[monthc])
-        list_of_months+=f"<a href='{path_of_redirection}'> <h1>{month}</h1></a>"
-    return HttpResponse(list_of_months)
+
    
     
         
