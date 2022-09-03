@@ -1,4 +1,5 @@
 from distutils.log import error
+import re
 from django.http import HttpRequest
 from django.shortcuts import render
 from django.urls import reverse
@@ -7,7 +8,7 @@ from django.template.loader import render_to_string
 # Create your views here.
 months = {
     "January" : "DO prepare for gate exams",
-    "February" : "Do AI Ml Projects",
+    "February" : None,
     "March" : " Get Domain for a Website and make it fully functional",
     "April" : "Get Domain for a Website and make it functional  and     functional",
     "May" : "Get Domain for a Website and make it functional and functional",   
@@ -17,19 +18,24 @@ months = {
     "September" : "Got placed for a good paying internship",
     "October" : "help Your Home ",
     "November" : "become CEO of a Startup",
-    "December" : "Get a Job in Amazon",
+    "December" : None,
     
 }
 def index(request):
     # list_of_months = "";
     # months_ki_list = list(months.keys())
-    # for month in months_ki_list:
+    # for month in month:
        
     #     monthc = month.capitalize()
     #     path_of_redirection = reverse("monthly-challenge",args=[monthc])
-    #     list_of_months+=f"<a href='{path_of_redirection}'> <h1>{month}</h1></a>"
-    html_string = render_to_string("challenges/challenges.html")
-    return HttpResponse(html_string)
+    #     # list_of_months+=f"<a href='{path_of_redirection}'> <h1>{month}</h1></a>"
+    # html_string = render_to_string("challenges/challenges.html")
+    # return HttpResponse(html_string)
+    list_of_months = list(months.keys())
+    return render(request, 'challenges/index.html' , {
+        "months_list": list_of_months
+    })
+    # return render(request, 'challenges/challenges.html')
 def challenges_by_number(request,month):
     target_month = list(months.keys())
     if(month>12):
@@ -40,9 +46,14 @@ def challenges_by_number(request,month):
     
 def monthly_challenge(request,month):
     try:
-        return HttpResponse(f"<h1>{months[month]}</h1>")
+        task = months[month]
+        return render(request ,"challenges/challenges.html",{
+            "title_month" : month ,
+            "task" : task
+        })
+        # return HttpResponse(f"<h1>{months[month]}</h1>")
     except :
-        return HttpResponseNotFound("Error Page Not Found"+ error)
+        return HttpResponseNotFound("Error Page Not Found")
 
    
     
