@@ -56,8 +56,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # os.path.join(BASE_DIR,'challenges/templates') 
-            # Just register your app and then you don't need to give a path to template directory here Untill APP_DIRS is true belows
+            os.path.join(BASE_DIR,'templates') 
+            # This path is provide for base templates for all apps
+            # Just register your app and then you don't need to give a path to template directory of Apps here Untill APP_DIRS is true belows
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]

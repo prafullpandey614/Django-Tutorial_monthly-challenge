@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello Mother Fucker  !!</h1>
-    <h3>{{title_month|title}} </h3>
-    {% if task is not None %}
-    <h4>Task : {{task}}</h4>
-     {%else%}
-     <h4>Please add some task You are khali Baithegaa😂😂😂😂😂</h4>
-    {% endif %}
-    
-</body>
-</html>
+{% extends "base.html" %} {% block page_title %} {{title_month|title}} January
+{% endblock page_title %} 
+{% load static %}
+<link rel="stylesheet" href="{% static 'challenges/includes/header.css' %}">
+<link rel="stylesheet" href="{% static 'challenges/challenges.css' %}">
+<link rel="stylesheet" href="{% static 'challenges/challenge.css' %}" >
+
+
+
+
+{% block content %} {% comment %}
+<h1>Hello Mother Fucker !!</h1>
+{% endcomment %}
+{% include "challenges/includes/header.html" %}
+<h1>{{title_month|title}}</h1>
+{% if task is not None %}
+<h2>Task : {{task}}</h2>
+{%else%}
+<p class="fallback">Please add some task You are khali Baithegaa😂😂😂😂😂</p>
+
+{% endif %} {% endblock content%}

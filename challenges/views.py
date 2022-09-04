@@ -3,7 +3,7 @@ import re
 from django.http import HttpRequest
 from django.shortcuts import render
 from django.urls import reverse
-from django.http import HttpResponse,HttpResponseBadRequest,HttpResponseNotFound,HttpResponseRedirect
+from django.http import Http404,HttpResponseNotFound,HttpResponseRedirect
 from django.template.loader import render_to_string
 # Create your views here.
 months = {
@@ -53,7 +53,7 @@ def monthly_challenge(request,month):
         })
         # return HttpResponse(f"<h1>{months[month]}</h1>")
     except :
-        return HttpResponseNotFound("Error Page Not Found")
+        raise Http404()
 
    
     
